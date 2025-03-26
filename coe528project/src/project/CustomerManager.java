@@ -22,7 +22,7 @@ public class CustomerManager {
     
     //Effects: Returns the single instance of the CustomerManager object, if
     //         no instance is instantiated it creates one.
-    public CustomerManager getInstance(){
+    public static CustomerManager getInstance(){
         if (instance == null){
             instance = new CustomerManager();
         }
@@ -50,10 +50,15 @@ public class CustomerManager {
         customers.remove(c);
     }
     
+    public ArrayList<Customer> getCusomters(){
+        return customers;
+    }
+    
     // Saving this for later gonna need to figure out how to parse
     public void loadCustomers(){
         
     }
+    
     
     // Idk how to write specifications for this, since its modifying a file.
     public void saveCustomers(){
