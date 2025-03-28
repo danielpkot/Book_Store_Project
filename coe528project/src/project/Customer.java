@@ -4,17 +4,24 @@ package project;
 public class Customer extends User {
     
     private int points;
-    
-    private CustomerState state; 
-    
-    //gotta do this
-    public Customer(String name, String password){
-        super(name,password);
+    private CustomerState state;
+
+    public Customer(String username, String password, int points) {
+        super(username, password);
+        this.points = points;
+        this.state = (points >= 1000) ? new GoldState() : new SilverState();
     }
+
+    public int getPoints() { return points; }
+    public void addPoints(int p) { points += p; }
+    public void setState(CustomerState state) { this.state = state; }
+
+    public void purchase(double amount) { state.purchase(this, amount); }
     
-    //Effects: Returns Customer points
-    public int getPoints(){
-        return points;
+    @Override
+    public String toString() {
+        return super.getUsername() + "," + super.getPassword() + "," + points;
+    
     }
     
     

@@ -9,7 +9,7 @@ public class BookManager {
     //          the list of books, also used for retrieving the list
     //           of books
     
-    private final static String filename = "books.txt";
+    private final static String FILE_NAME = "books.txt";
     
     private static BookManager instance = null;
     
@@ -41,6 +41,12 @@ public class BookManager {
     //
     //Effects: Adds a book to the books arraylist
     public void addBook(Book b){
+        for (Book b1 : books) {
+            if (b.getName().equals(b1.getName())) {
+                System.out.println("Book already exists!");
+                return;
+            }
+        }
         books.add(b);
     }
     
@@ -51,23 +57,38 @@ public class BookManager {
         books.remove(b);
     }
     
-    // Saving this for later gonna need to test this alot I feel like
-    public void loadBooks(){
-        
-    }
     
-    
+    //Not sure how to write specifications for this, since the only thing
+    //we are modifying is a file.
     public void saveBooks(){
-        try {
-            FileWriter writer = new FileWriter(filename,true);
-            for(Book b : books){
-                writer.write(b.getName() + " " + b.getPrice() + "\n" );
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (Book book : books) {
+                writer.write(book.toString());
+                writer.newLine();
             }
-            writer.close();
-        } catch(IOException e) {
-            System.out.println("An error occurred.");
+        } catch (IOException e) {
+            System.out.println("Error saving books: " + e.getMessage());
         }
     }
     
-    
+    //Not sure how to write specifications for this, since the only thing
+    //we are modifying is a file.
+    public void loadBooks() {
+        File file = new File(FILE_NAME);
+        if (!file.exists()) return;
+        
+        books.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                books.add(new Book(parts[0], Double.parseDouble(parts[1])));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading books: " + e.getMessage());
+        }
+    }
 }
+    
+    
+

@@ -4,15 +4,10 @@ package project;
 public class GoldState implements CustomerState {
     //gotta implement this
     
-    
     @Override
-    public double buy(double price){
-        return 1.00;
+     public void purchase(Customer customer, double amount) {
+        customer.addPoints((int) (amount * 10));
     }
     
-    @Override
-    public int redeem(int points){
-        return 1;
-    }
     
 }

@@ -3,6 +3,7 @@ package project;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
 
 
 public class CustomerManager {
@@ -10,7 +11,7 @@ public class CustomerManager {
     //          the list of books, also used for retrieving the list
     //           of books
     
-    private final static String filename = "customers.txt";
+    private final static String FILE_NAME = "customers.txt";
     
     private static CustomerManager instance = null;
     
@@ -40,6 +41,12 @@ public class CustomerManager {
     //
     //Effects: Adds a Customer to the books arraylist
     public void addCustomer(Customer c){
+         for (Customer c1 : customers) {
+            if (c1.getUsername().equals(c.getUsername())) {
+                System.out.println("Customer already exists!");
+                return;
+            }
+        }
         customers.add(c);
     }
     
@@ -62,18 +69,17 @@ public class CustomerManager {
     
     // Idk how to write specifications for this, since its modifying a file.
     public void saveCustomers(){
-        try {
-            FileWriter writer = new FileWriter(filename,true);
-            for(Customer c : customers){
-                writer.write(c.getUsername() + " " + c.getPassword() 
-                        + " " + c.getPoints() +"\n" );
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (Customer customer : customers) {
+                writer.write(customer.toString() + "," + (customer.getPoints() >= 1000 ? "Gold" : "Silver"));
+                writer.newLine();
             }
-            writer.close();
-        } catch(IOException e) {
-            System.out.println("An error occurred.");
+        } catch (IOException e) {
+            System.out.println("Error saving customers: " + e.getMessage());
         }
     }
+}
     
     
-} 
+ 
 
