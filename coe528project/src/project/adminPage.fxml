@@ -5,8 +5,8 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.sceneController">
    <children>
-      <Button fx:id="booksButton" layoutX="225.0" layoutY="14.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="151.0" text="Books" />
-      <Button fx:id="customersButton" layoutX="225.0" layoutY="154.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="151.0" text="Customers" />
+      <Button fx:id="booksButton" layoutX="225.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToBookEditorPage" prefHeight="92.0" prefWidth="151.0" text="Books" />
+      <Button fx:id="customersButton" layoutX="225.0" layoutY="154.0" mnemonicParsing="false" onAction="#switchToCustomerEditorPage" prefHeight="92.0" prefWidth="151.0" text="Customers" />
       <Button fx:id="logoutButton" layoutX="225.0" layoutY="294.0" mnemonicParsing="false" onAction="#switchToLoginPage" prefHeight="92.0" prefWidth="151.0" text="Logout" />
    </children>
 </AnchorPane>

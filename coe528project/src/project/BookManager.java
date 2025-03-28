@@ -18,12 +18,12 @@ public class BookManager {
     
     //Effects: Instantiates a BookManager object
     private BookManager(){
-     
+        books = new ArrayList<Book>();
     }
     
     //Effects: Returns the single instance of the BookManager object, if
     //         no instance is instantiated it creates one.
-    public BookManager getInstance(){
+    public static BookManager getInstance(){
         if (instance == null){
             instance = new BookManager();
         }
@@ -75,9 +75,9 @@ public class BookManager {
     //we are modifying is a file.
     public void loadBooks() {
         File file = new File(FILE_NAME);
-        if (!file.exists()) return;
-        
+        if (!file.exists()){System.out.println("Here!");  return;}
         books.clear();
+        System.out.println("Here!");
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
