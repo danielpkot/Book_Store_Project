@@ -12,21 +12,21 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="1048.0">
          <children>
-            <TableView fx:id="bookEditTable" editable="true" layoutX="400.0" layoutY="113.0" prefHeight="249.0" prefWidth="249.0">
+            <TableView fx:id="customerEditTable" editable="true" layoutX="400.0" layoutY="113.0" prefHeight="249.0" prefWidth="249.0">
                <columns>
-                  <TableColumn fx:id="CustomerName" prefWidth="75.0" text="Name" />
-                  <TableColumn fx:id="CustomerPassword" prefWidth="75.0" text="Password" />
-                  <TableColumn fx:id="CustomerPoints" prefWidth="75.0" text="Points" />
+                  <TableColumn fx:id="customerName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="customerPassword" prefWidth="75.0" text="Password" />
+                  <TableColumn fx:id="customerPoints" prefWidth="75.0" text="Points" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
             <TextField fx:id="nameInput" layoutX="450.0" layoutY="405.0" promptText=" Name" />
-            <TextField fx:id="priceInput" layoutX="450.0" layoutY="457.0" promptText="price" />
-            <Button fx:id="addButton" layoutX="490.0" layoutY="493.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="69.0" text="Add" />
+            <TextField fx:id="passwordInput" layoutX="450.0" layoutY="457.0" promptText="password" />
+            <Button fx:id="addButton" layoutX="490.0" layoutY="493.0" mnemonicParsing="false" onAction="#addBook" prefHeight="44.0" prefWidth="69.0" text="Add" />
             <Button fx:id="BackButton" layoutX="525.0" layoutY="617.0" mnemonicParsing="false" onAction="#switchToAdminPage" prefHeight="61.0" prefWidth="76.0" text="Back" />
-            <Button layoutX="448.0" layoutY="617.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="76.0" text="Delete" />
+            <Button fx:id="deleteButton" layoutX="448.0" layoutY="617.0" mnemonicParsing="false" onAction="#removeBook" prefHeight="61.0" prefWidth="76.0" text="Delete" />
             <Text layoutX="315.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Management">
                <font>
                   <Font size="50.0" />

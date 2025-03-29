@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -50,6 +51,7 @@ public class BookEditorController implements Initializable {
     private TextField priceInput;
     
     
+    
    public void switchToAdminPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("adminPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -65,23 +67,41 @@ public class BookEditorController implements Initializable {
        
        try{
            bm.addBook(new Book(name,(double) Double.parseDouble(price)));
+           ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
+            bookEditTable.setItems(bookList);
+            nameInput.clear();
+            priceInput.clear();
            
        }catch(NumberFormatException e){
            System.out.println("Price not a double");
        }
        
-       ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
-       bookEditTable.setItems(bookList);
        
+       for(Book b:bm.getBooks()){
+           System.out.println(b.toString());
+       }
+       
+    }
+   
+    public void removeBook(ActionEvent event) throws IOException{
+        ObservableList<Book> selectedBooks , bookList;
+        bookList = bookEditTable.getItems();
+        
+        //Gives the rows that were selected.
+        selectedBooks = bookEditTable.getSelectionModel().getSelectedItems();
+        
+ 
+        bookList.removeAll(selectedBooks);
     }
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        bm.loadBooks();
+        bookName.setCellValueFactory(new PropertyValueFactory<Book, String>("name"));
+        bookPrice.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
         ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
         bookEditTable.setItems(bookList);
+        bookEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }    
     
 }

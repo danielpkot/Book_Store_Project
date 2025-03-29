@@ -19,7 +19,9 @@ public class CustomerManager {
     
     
     //Effects: Instantiates a CustomerManager object
-    private CustomerManager(){}
+    private CustomerManager(){
+        customers = new ArrayList<Customer>();
+    }
     
     //Effects: Returns the single instance of the CustomerManager object, if
     //         no instance is instantiated it creates one.

@@ -7,6 +7,8 @@ package project;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +17,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -31,26 +35,52 @@ public class CustomerEditorController implements Initializable {
     private Scene scene;
     private Parent root;
     
-    BookManager bm = BookManager.getInstance();
+    CustomerManager cm = CustomerManager.getInstance();
+    
+   
     
     @FXML
-    private Button BackButton;
+    private TableView<Customer> customerEditTable;
+
+    @FXML
+    private TableColumn<Customer, String> customerName;
+
+    @FXML
+    private TableColumn<Customer, String> customerPassword;
     
     @FXML
-    private TableView<Book> bookEditTable;
+    private TableColumn<Customer, Integer> customerPoints;
 
-    @FXML
-    private TableColumn<Book, String> bookName;
-
-    @FXML
-    private TableColumn<Book, Double> bookPrice;
 
     @FXML
     private TextField nameInput;
 
     @FXML
-    private TextField priceInput;
+    private TextField passwordInput;
     
+    
+    public void addBook(ActionEvent event) throws IOException{
+       
+       String name = nameInput.getText();
+       String password =  passwordInput.getText();
+       
+        cm.addCustomer(new Customer(name,password, 0));
+        ObservableList<Customer> customerList = FXCollections.observableList(cm.getCustomers());
+        customerEditTable.setItems(customerList);
+        nameInput.clear();
+        passwordInput.clear();
+    }
+    
+    
+    public void removeBook(ActionEvent event) throws IOException{
+        ObservableList<Customer> selectedCustomers , customerList;
+        customerList = customerEditTable.getItems();
+        
+        //Gives the rows that were selected.
+        selectedCustomers = customerEditTable.getSelectionModel().getSelectedItems();
+        // Removes them
+        customerList.removeAll(selectedCustomers);
+    }
     
    public void switchToAdminPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("adminPage.fxml"));
@@ -63,7 +93,12 @@ public class CustomerEditorController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        customerName.setCellValueFactory(new PropertyValueFactory<Customer, String>("Username"));
+        customerPassword.setCellValueFactory(new PropertyValueFactory<Customer, String>("password"));
+        customerPoints.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("points"));
+        ObservableList<Customer> customerList = FXCollections.observableList(cm.getCustomers());
+        customerEditTable.setItems(customerList);
+        customerEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }    
     
 }

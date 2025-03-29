@@ -34,10 +34,10 @@ public class FXMLController implements Initializable {
    @FXML
    private void handleLogin(ActionEvent event) throws IOException{
        
-       CustomerManager cManager = CustomerManager.getInstance();
+       CustomerManager cm = CustomerManager.getInstance();
        
        String input1 = usernameField.getText();
-       String input2 = usernameField.getText();
+       String input2 = passwordField.getText();
        
        boolean loggedin = false;
        
@@ -53,12 +53,16 @@ public class FXMLController implements Initializable {
             stage.show();
        }
        else{
-           for(Customer c: cManager.getCustomers())
+           for(Customer c: cm.getCustomers()){
+               System.out.println(c.toString());
+               System.out.println(c.getUsername());
+               System.out.println(c.getPassword());
                if (c.getUsername().equals(input1) 
                        && c.getPassword().equals(input2)){
                    System.out.println("Sucess");
                    loggedin = true;
                }
+           }
        }
        
        if (loggedin = false){

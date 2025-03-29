@@ -16,6 +16,8 @@ public class sceneController {
     private Scene scene;
     private Parent root;
     
+    private BookManager bm = BookManager.getInstance();
+    
     
     public void switchToOwnerPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("adminPage.fxml"));

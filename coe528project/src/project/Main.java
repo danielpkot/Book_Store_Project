@@ -25,6 +25,13 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+         BookManager manager = BookManager.getInstance();
+        manager.loadBooks();
+
+        System.out.println("Loaded Books:");
+        for (Book book : manager.getBooks()) {
+            System.out.println("Name: " + book.getName() + " | Price: " + book.getPrice());
+        }
         launch(args);
     }
     

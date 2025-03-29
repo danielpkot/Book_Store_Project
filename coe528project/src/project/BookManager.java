@@ -73,21 +73,43 @@ public class BookManager {
     
     //Not sure how to write specifications for this, since the only thing
     //we are modifying is a file.
-    public void loadBooks() {
+     public void loadBooks() {
         File file = new File(FILE_NAME);
-        if (!file.exists()){System.out.println("Here!");  return;}
+        
+        System.out.println("aa");
+        // Create file if it does not exist
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                        writer.write("Harry Potter 10.99\n");
+                    }
+                    System.out.println("books.txt created with default book.");
+                }
+            } catch (IOException e) {
+                System.out.println("Failed to create books.txt: " + e.getMessage());
+                return;
+            }
+        }
+
         books.clear();
-        System.out.println("Here!");
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                books.add(new Book(parts[0], Double.parseDouble(parts[1])));
+                int lastSpace = line.lastIndexOf(" ");
+                if (lastSpace == -1) continue;
+
+                String name = line.substring(0, lastSpace);
+                double price = Double.parseDouble(line.substring(lastSpace + 1));
+
+                books.add(new Book(name, price));
             }
-        } catch (IOException e) {
+        } catch (IOException | NumberFormatException e) {
             System.out.println("Error loading books: " + e.getMessage());
         }
     }
+
 }
     
     
