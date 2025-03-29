@@ -5,24 +5,31 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class BookManager {
-    //Overview: Book manager used for adding/removing books from
-    //          the list of books, also used for retrieving the list
-    //           of books
+    
+    
     
     private final static String FILE_NAME = "books.txt";
-    
     private static BookManager instance = null;
-    
     private ArrayList<Book> books;
     
-    
-    //Effects: Instantiates a BookManager object
+     /**
+     * Constructs a new BookManager and initializes an empty book list.
+     * 
+     * Requires: none
+     * Modifies: this
+     * Effects: Initializes the books list to empty
+     */
     private BookManager(){
         books = new ArrayList<Book>();
     }
     
-    //Effects: Returns the single instance of the BookManager object, if
-    //         no instance is instantiated it creates one.
+     /**
+     * Returns the singleton instance of the BookManager.
+     * 
+     * Requires: none
+     * Modifies: instance if null
+     * Effects: Returns the existing BookManager instance or creates one
+     */
     public static BookManager getInstance(){
         if (instance == null){
             instance = new BookManager();
@@ -31,15 +38,26 @@ public class BookManager {
     }
     
     
-    //Effects: Returns arraylist containing all books
+     /**
+     * Gets all the books currently in the manager.
+     * 
+     * Requires: none
+     * Modifies: none
+     * Effects: Returns the list of stored books
+     */
     public ArrayList<Book> getBooks(){
         return books;
     }
     
     
-    //Modifies: this.books
-    //
-    //Effects: Adds a book to the books arraylist
+     /**
+     * Adds a book to the manager if it does not already exist.
+     * 
+     * Requires: b is not null
+     * Modifies: this.books
+     * Effects: Adds the book to the list if not already present
+     */
+
     public void addBook(Book b){
         for (Book b1 : books) {
             if (b.getName().equals(b1.getName())) {
@@ -50,16 +68,27 @@ public class BookManager {
         books.add(b);
     }
     
-    //Modifies: this.books
-    //
-    //Effects: Removes a book from the books arraylist
+    /**
+     * Removes a book from the manager.
+     * 
+     * Requires: b is not null and exists in the list
+     * Modifies: this.books
+     * Effects: Removes the specified book from the list
+     */
+
     public void Remove(Book b){
         books.remove(b);
     }
     
     
-    //Not sure how to write specifications for this, since the only thing
-    //we are modifying is a file.
+   /**
+     * Saves all books to a file for persistence.
+     * 
+     * Requires: FILE_NAME must be a valid file path
+     * Modifies: books.txt file
+     * Effects: Writes each book's data to the file
+     */
+
     public void saveBooks(){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Book book : books) {
@@ -71,8 +100,14 @@ public class BookManager {
         }
     }
     
-    //Not sure how to write specifications for this, since the only thing
-    //we are modifying is a file.
+    /**
+     * Loads Books from file into books object
+     * Creates a file if it doesn't exist
+     * 
+     * Requires: 
+     * Modifies: this.books, FileSystem
+     * Effects: Populates books from file
+     */
      public void loadBooks() {
         File file = new File(FILE_NAME);
         

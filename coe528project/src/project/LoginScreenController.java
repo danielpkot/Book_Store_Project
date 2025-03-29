@@ -15,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class FXMLController implements Initializable {
+public class LoginScreenController implements Initializable {
     
+   BookManager bm = BookManager.getInstance();
+   CustomerManager cm = CustomerManager.getInstance();
    
    @FXML
    private TextField usernameField;
@@ -33,8 +35,6 @@ public class FXMLController implements Initializable {
    
    @FXML
    private void handleLogin(ActionEvent event) throws IOException{
-       
-       CustomerManager cm = CustomerManager.getInstance();
        
        String input1 = usernameField.getText();
        String input2 = passwordField.getText();
@@ -56,7 +56,8 @@ public class FXMLController implements Initializable {
            for(Customer c: cm.getCustomers()){
                if (c.getUsername().equals(input1) 
                        && c.getPassword().equals(input2)){
-                   System.out.println("Sucess");
+                   c.setLogin(true);
+                   System.out.println("Logged In: " + c.toString());
                    loggedin = true;
                    FXMLLoader loader = 
                    new FXMLLoader(getClass().getResource("customerStartScreen.fxml"));
@@ -78,7 +79,8 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        bm.loadBooks();
+        cm.loadCustomers();
     }
    
 }
