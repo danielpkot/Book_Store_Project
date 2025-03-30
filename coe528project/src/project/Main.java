@@ -11,15 +11,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
-    BookManager bm = BookManager.getInstance();
-    CustomerManager cm = CustomerManager.getInstance();
+    private Owner owner = Owner.getInstance();
     
+    
+   
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXML/loginPage.fxml"));
         
-        bm.loadBooks();
-        cm.loadCustomers();
+        owner.getBookManager().loadBooks();
+        owner.getCustomerManager().loadCustomers();
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -38,8 +39,8 @@ public class Main extends Application {
     
     private void saveData(){
         System.out.println("Exiting");
-        bm.saveBooks();
-        cm.saveCustomers();
+        owner.getBookManager().saveBooks();
+        owner.getCustomerManager().saveCustomers();
         
     }
     

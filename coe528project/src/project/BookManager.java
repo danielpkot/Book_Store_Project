@@ -4,17 +4,31 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.*;
 
+
+/*
+ * Abstraction Function:
+ * AF(m) = A BookManager object m where:
+ *         - m.books is the list of all Book objects
+ *         - The file "books.txt" is used for storing the book data
+ *         - The books are stored in insertion order
+ *
+ * Representation Invariant:
+ * RI(m) = true if:
+ *         - m.books ≠ null
+ *         - For all integers i, j (0 ≤ i < j < m.books.size()),
+ *           m.books.get(i).getName() ≠ m.books.get(j).getName()
+ *         - FILE_NAME refers to a valid accessible path
+ */
+
 public class BookManager {
-    
+    //Overview: Book Manager class for managing all the book objects
     
     
     private final static String FILE_NAME = "books.txt";
     private static BookManager instance = null;
     private ArrayList<Book> books;
     
-     /**
-     * Constructs a new BookManager and initializes an empty book list.
-     * 
+     /*
      * Requires: none
      * Modifies: this
      * Effects: Initializes the books list to empty
@@ -23,12 +37,10 @@ public class BookManager {
         books = new ArrayList<Book>();
     }
     
-     /**
-     * Returns the singleton instance of the BookManager.
-     * 
+     /*
      * Requires: none
      * Modifies: instance if null
-     * Effects: Returns the existing BookManager instance or creates one
+     * Effects: Returns the singleton instance of the book manager
      */
     public static BookManager getInstance(){
         if (instance == null){
@@ -38,9 +50,7 @@ public class BookManager {
     }
     
     
-     /**
-     * Gets all the books currently in the manager.
-     * 
+     /*
      * Requires: none
      * Modifies: none
      * Effects: Returns the list of stored books
@@ -53,7 +63,7 @@ public class BookManager {
      /**
      * Adds a book to the manager if it does not already exist.
      * 
-     * Requires: 
+     * Requires:  none
      * Modifies: this.books
      * Effects: Adds the book to the list if not already present
      */
@@ -61,7 +71,7 @@ public class BookManager {
     public void addBook(Book b){
         if(b == null){ return;}
         for (Book b1 : books) {
-            if (b.getName().equals(b1.getName())) {
+            if (b.getName().trim().equals(b1.getName().trim())) {
                 System.out.println("Book already exists!");
                 return;
             }
@@ -71,26 +81,24 @@ public class BookManager {
             return;
         }
         books.add(b);
+        System.out.println("Book added: " + b.getName() + " ($" + b.getPrice() + ")");
     }
     
-    /**
-     * Removes a book from the manager.
-     * 
+    /*
      * Requires: 
      * Modifies: this.books
-     * Effects: Removes the specified book from the list
+     * Effects: Removes the specified book from the list, if it's in the list
      */
-
     public void remove(Book b){
         if(b== null){ return;}
         books.remove(b);
+        System.out.println("if boox exists, Book removed: " + b.getName());
     }
     
     
    /**
      * Saves all books to a file for persistence.
-     * 
-     * Requires: FILE_NAME must be a valid file path
+     *
      * Modifies: books.txt file
      * Effects: Writes each book's data to the file
      */
@@ -110,7 +118,7 @@ public class BookManager {
      * Loads Books from file into books object
      * Creates a file if it doesn't exist
      * 
-     * Requires: 
+     * Requires: books.txt exists in the file path
      * Modifies: this.books, FileSystem
      * Effects: Populates books from file
      */

@@ -1,19 +1,17 @@
 package project;
 
-/**
- * Represents the Silver loyalty state for a customer.
- *
+/*
  * Abstraction Function:
- * - Customers in the Silver state earn points and can upgrade to Gold status.
+ * AF(ss) = A SilverState object ss where:
+ *          - Customers in this state earn regular points and may upgrade to Gold
+ *          - ss defines the behavior for point accumulation and upgrade condition
  *
  * Representation Invariant:
- * - None specific; behavior is defined in the purchase method.
+ * RI(ss) = true (no specific invariant constraints)
  */
+
 public class SilverState implements CustomerState {
-   // gotta do this
-     /**
-     * Applies the Silver state reward rules to the customer's purchase.
-     *
+     /*
      * Requires: customer is not null, amount ≥ 0
      * Modifies: customer's points, possibly customer's state
      * Effects: Adds 10 points per dollar; upgrades to Gold if points ≥ 1000
@@ -26,6 +24,13 @@ public class SilverState implements CustomerState {
         }
     }
     
+    
+    // REQUIRES: customer ≠ null, amount ≥ 0
+    // MODIFIES: customer's points, state(if threshold hit)
+    // EFFECTS: remove 1 off the total cost per 100 points that the 
+    //          customer has, if the customer doesn't have enough, treat
+    //          it as if the customer buys with cash accumulating 10 points
+    //          per dollar spent
     @Override
     public void purchaseWithPoints(Customer customer, double amount){
         if (customer.getPoints()/100 >= amount){

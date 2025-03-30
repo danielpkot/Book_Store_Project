@@ -7,20 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileReader;
+/*
+ * Abstraction Function:
+ * AF(cm) = A CustomerManager object cm where:
+ *          - cm.customers is a list of all Customer objects in the system
+ *          - The file "customers.txt" is used to persist the customer data
+ *
+ * Representation Invariant:
+ * RI(cm) = true if:
+ *          - cm.customers ≠ null
+ *          - For all integers i, j (0 ≤ i < j < cm.customers.size()),
+ *            cm.customers.get(i).getUsername() ≠ cm.customers.get(j).getUsername()
+ *          - FILE_NAME refers to a valid writable path
+ */
 
 
 public class CustomerManager {
-   /**
-    * Manages all customer records in the system.
-    *
-    * Abstraction Function:
-    * - CustomerManager stores, adds, removes, and persists customer data.
-    * - Acts as a centralized registry for all customer-related operations.
-    *
-    * Representation Invariant:
-     * - customers list must not be null
-    * - FILE_NAME must be a valid file path
-    * - No duplicate usernames allowed in the customers list
+   /** Overview: CustomerManager for managing the customers in the list
+    * 
     */
     
     private final static String FILE_NAME = "customers.txt";
@@ -28,9 +32,7 @@ public class CustomerManager {
     private ArrayList<Customer> customers;
     
     
-    /**
-     * Constructs a CustomerManager with an empty customer list.
-     *
+    /*
      * Requires: none
      * Modifies: this
      * Effects: Initializes the customers list as empty
@@ -39,12 +41,10 @@ public class CustomerManager {
         customers = new ArrayList<Customer>();
     }
     
-     /**
-     * Retrieves the singleton instance of CustomerManager.
-     *
+     /*
      * Requires: none
      * Modifies: instance if null
-     * Effects: Returns the same instance on every call
+     * Effects: Returns singleton instance 
      */
     public static CustomerManager getInstance(){
         if (instance == null){
@@ -54,8 +54,6 @@ public class CustomerManager {
     }
     
     /**
-     * Gets all ArrayList of customers managed by the system.
-     *
      * Requires: none
      * Modifies: none
      * Effects: Returns a list of all customers
@@ -65,18 +63,17 @@ public class CustomerManager {
     }
     
     
-     /**
-     * Adds a new customer to the system if the username is unique.
-     *
+     /*
      * Modifies: this.customers
-     * Effects: Adds the customer if no duplicate username exists
+     * Effects: Adds the customer if valid username/password and 
+     *          not a duplicate
      */
     public void addCustomer(Customer c){
         if (c == null){
             return;
         }
         for (Customer c1 : customers) {
-            if (c1.getUsername().equals(c.getUsername())) {
+            if (c1.getUsername().trim().equals(c.getUsername().trim())) {
                 System.out.println("Customer already exists!");
                 return;
             }
@@ -85,6 +82,7 @@ public class CustomerManager {
             return;
         }
         customers.add(c);
+        System.out.println("Customer added: " + c.getUsername());
     }
     
     /**
@@ -98,11 +96,14 @@ public class CustomerManager {
             return;
         }
         customers.remove(c);
+        System.out.println("if Customer exists, Customer removed: " + c.getUsername());
     }
     
     
     
-    
+    // REQUIRES: FILE_NAME must be accessible
+    // MODIFIES: this.customers
+    // EFFECTS: Populates customers from file 
     // Saving this for later gonna need to figure out how to parse
     public void loadCustomers(){
         try( BufferedReader reader = new BufferedReader(new FileReader("customers.txt"))){

@@ -1,1 +1,4 @@
-daniel,1234,800
+daniel,123,800
+Kirusanth,123,0
+Robert,123,0
+soham,123,0

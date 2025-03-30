@@ -33,15 +33,15 @@ import project.Owner;
  * @author danie
  */
 public class CustomerEditorController implements Initializable {
-
+    //Stage, Scene and Parent used for switching to a different GUI window
     private Stage stage;
     private Scene scene;
     private Parent root;
-    
+    //Owner object for managing Customers
     private Owner owner = Owner.getInstance();
     
    
-    
+    //GUI items
     @FXML
     private TableView<Customer> customerEditTable;
 
@@ -61,22 +61,25 @@ public class CustomerEditorController implements Initializable {
     @FXML
     private TextField passwordInput;
     
-    
-    public void addBook(ActionEvent event) throws IOException{
-       
+    //Method for adding Customers
+    public void addCustomer(ActionEvent event) throws IOException{
+       //Gathers info from the textfields and stores them
        String name = nameInput.getText();
        String password =  passwordInput.getText();
-       
+       //creates a new Customer item with the inputs and adds it to the book list
         owner.addCustomer(new Customer(name,password, 0));
+         //Creates an Observable List(needed for table view), from the customer list
         ObservableList<Customer> customerList = FXCollections.observableList(owner.getCustomerManager().getCustomers());
+        //Places the data into the table, and clears text inputs.
         customerEditTable.setItems(customerList);
         nameInput.clear();
         passwordInput.clear();
     }
     
-    
-    public void removeBook(ActionEvent event) throws IOException{
+    //Method for removing customers
+    public void removeCustomer(ActionEvent event) throws IOException{
         ObservableList<Customer> selectedCustomers , customerList;
+        //gets items from table
         customerList = customerEditTable.getItems();
         
         //Gives the rows that were selected.
@@ -84,9 +87,10 @@ public class CustomerEditorController implements Initializable {
         // Removes them
         customerList.removeAll(selectedCustomers);
     }
-    
+   
+   //Switches to main owner page
    public void switchToAdminPage(ActionEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("adminPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ownerPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -96,9 +100,11 @@ public class CustomerEditorController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //primes the columns with the specified getters, ex. Customer Class getUsername()
         customerName.setCellValueFactory(new PropertyValueFactory<Customer, String>("Username"));
         customerPassword.setCellValueFactory(new PropertyValueFactory<Customer, String>("password"));
         customerPoints.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("points"));
+        //places the CustomerList into an observable list, uses it for the table, lets you multiselect.
         ObservableList<Customer> customerList = FXCollections.observableList(owner.getCustomerManager().getCustomers());
         customerEditTable.setItems(customerList);
         customerEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

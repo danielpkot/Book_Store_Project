@@ -1,2 +1,5 @@
-one piece,12.0
-bleach,10.0
+one piece ,10.0
+bleach ,10.0
+vagabond,50.0
+berserk,50.0
+dragon ball z,10.0

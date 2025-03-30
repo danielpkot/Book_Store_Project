@@ -1,20 +1,17 @@
 package project;
 
-/**
- * Represents the Gold loyalty state for a customer.
- *
+/*
  * Abstraction Function:
- * - Customers in the Gold state earn more rewards per purchase.
- * - This class defines how points are earned when in Gold tier.
+ * AF(gs) = A GoldState object gs where:
+ *          - Customers in this state earn maximum points per purchase
+ *          - gs defines the behavior for point accumulation in Gold tier
  *
  * Representation Invariant:
- * - None specific; behavior is determined by the logic in purchase method.
+ * RI(gs) = true (no specific invariant constraints)
  */
 public class GoldState implements CustomerState {
     
-    /**
-     * Applies the Gold state reward rules to the customer's purchase.
-     *
+    /*
      * Requires: customer is not null, amount ≥ 0
      * Modifies: customer's points
      * Effects: Adds 10 points per dollar spent to the customer
@@ -23,7 +20,13 @@ public class GoldState implements CustomerState {
      public void purchase(Customer customer, double amount) {
         customer.setPoints( customer.getPoints()+((int) amount) * 10);
     }
-     
+    
+    // REQUIRES: customer ≠ null, amount ≥ 0
+    // MODIFIES: customer's points, state(if threshold hit)
+    // EFFECTS: remove 1 off the total cost per 100 points that the 
+    //          customer has, if the customer doesn't have enough, treat
+    //          it as if the customer buys with cash accumulating 10 points
+    //          per dollar spent
     @Override
     public void purchaseWithPoints(Customer customer, double amount){
         

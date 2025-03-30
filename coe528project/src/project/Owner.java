@@ -26,24 +26,20 @@ public class Owner extends User {
 
     public void addBook(Book b){
         bookManager.addBook(b);
-        System.out.println("Book added: " + b.getName() + " ($" + b.getPrice() + ")");
     }
 
     public void removeBook(Book b){
             bookManager.remove(b);
-            System.out.println("Book removed: " + b.getName());
             return;
        
     }
 
     public void addCustomer(Customer c){
         customerManager.addCustomer(c);
-        System.out.println("Customer added: " + c.getUsername());
     }
 
     public void removeCustomer(Customer c){     
         customerManager.remove(c);
-        System.out.println("Customer removed: " + c.getUsername());
         return;
 
     }

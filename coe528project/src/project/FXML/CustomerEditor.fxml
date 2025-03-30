@@ -24,9 +24,9 @@
             </TableView>
             <TextField fx:id="nameInput" layoutX="450.0" layoutY="405.0" promptText=" Name" />
             <TextField fx:id="passwordInput" layoutX="450.0" layoutY="457.0" promptText="password" />
-            <Button fx:id="addButton" layoutX="490.0" layoutY="493.0" mnemonicParsing="false" onAction="#addBook" prefHeight="44.0" prefWidth="69.0" text="Add" />
+            <Button fx:id="addButton" layoutX="490.0" layoutY="493.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="44.0" prefWidth="69.0" text="Add" />
             <Button fx:id="BackButton" layoutX="525.0" layoutY="617.0" mnemonicParsing="false" onAction="#switchToAdminPage" prefHeight="61.0" prefWidth="76.0" text="Back" />
-            <Button fx:id="deleteButton" layoutX="448.0" layoutY="617.0" mnemonicParsing="false" onAction="#removeBook" prefHeight="61.0" prefWidth="76.0" text="Delete" />
+            <Button fx:id="deleteButton" layoutX="448.0" layoutY="617.0" mnemonicParsing="false" onAction="#removeCustomer" prefHeight="61.0" prefWidth="76.0" text="Delete" />
             <Text layoutX="315.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Management">
                <font>
                   <Font size="50.0" />

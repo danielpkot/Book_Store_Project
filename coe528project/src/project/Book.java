@@ -2,7 +2,18 @@ package project;
 
 import javafx.scene.control.CheckBox;
 
-
+/*
+ * Abstraction Function:
+ * AF(b) = A Book object where:
+ *         - b.name represents the title of the book
+ *         - b.price represents the cost of the book in dollars
+ *
+ * Representation Invariant:
+ * RI(b) = true if:
+ *         - b.name ≠ null
+ *         - b.name is not an empty string
+ *         - b.price ≥ 0
+ */
 public class Book {
     //Overview:Book class, representing a book with 
     //         a name, author and price
@@ -12,9 +23,7 @@ public class Book {
     private CheckBox select; 
     
     
-    /**
-     * Constructs a new Book object with a given name and price.
-     * 
+    /*
      * Requires: name is not null, price >= 0
      * Modifies: this
      * Effects: Initializes the book with the specified name and price
@@ -26,40 +35,45 @@ public class Book {
         
     }
     
-    /**
-     * Gets the name (title) of the book.
-     * 
+    /*
      * Requires: none
      * Modifies: none
-     * Effects: Returns the name of this book
+     * Effects: Returns the name of the book
      */
     public String getName(){
         return this.name;
     }
     
-    /**
-     * Gets the price of the book.
-     * 
+    /*
      * Requires: none
      * Modifies: none
-     * Effects: Returns the price of this book
+     * Effects: Returns the price of the book
      */
     public double getPrice(){
         return price;
     }
     
-    
+    /*
+     * Requires: none
+     * Modifies: none
+     * Effects: Returns the selection status of the book
+     *          checking if the box is checked
+     */
     public CheckBox getSelect(){
         return select;
     }
     
+    /*
+     * Requires: none
+     * Modifies: none
+     * Effects: sets the selection status of the 
+     *          checkbox associated with the book
+     */
     public void setSelect(CheckBox select){
         this.select = select;
     }
     
-    /**
-     * Converts this book into a string format for file storage.
-     * 
+    /*
      * Requires: none
      * Modifies: none
      * Effects: Returns a string in the form "name,price"
