@@ -11,13 +11,19 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
+    BookManager bm = BookManager.getInstance();
+    CustomerManager cm = CustomerManager.getInstance();
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         
-        Scene scene = new Scene(root);
+        bm.loadBooks();
+        cm.loadCustomers();
         
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setOnCloseRequest(Event -> {saveData();});
         stage.show();
     }
     
@@ -28,6 +34,13 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    private void saveData(){
+        System.out.println("Exiting");
+        bm.saveBooks();
+        cm.saveCustomers();
+        
     }
     
 }

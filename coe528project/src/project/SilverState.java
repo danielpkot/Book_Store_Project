@@ -20,10 +20,28 @@ public class SilverState implements CustomerState {
      */
     @Override
     public void purchase(Customer customer, double amount) {
-        customer.setPoints( customer.getPoints() +(int) (amount * 10));
+        customer.setPoints( customer.getPoints() +((int)amount)* 10);
         if (customer.getPoints() >= 1000) {
             customer.setState(new GoldState());
         }
+    }
+    
+    @Override
+    public void purchaseWithPoints(Customer customer, double amount){
+       System.out.println("Here!");
+        if (customer.getPoints()/100 >= amount){
+            customer.setPoints(customer.getPoints()-((int) amount)* 100);
+        }
+        else{
+            System.out.println("Points: " + customer.getPoints());
+            System.out.println("Amount: " + amount);
+            amount -= customer.getPoints()/100;
+            customer.setPoints((int)amount*10);
+        }
+        if (customer.getPoints() >= 1000) {
+            customer.setState(new GoldState());
+        }
+
     }
     
 }

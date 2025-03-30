@@ -76,7 +76,7 @@ public class BookManager {
      * Effects: Removes the specified book from the list
      */
 
-    public void Remove(Book b){
+    public void remove(Book b){
         books.remove(b);
     }
     
@@ -91,8 +91,8 @@ public class BookManager {
 
     public void saveBooks(){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Book book : books) {
-                writer.write(book.toString());
+            for (Book b : this.getBooks()) {
+                writer.write(b.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -109,40 +109,14 @@ public class BookManager {
      * Effects: Populates books from file
      */
      public void loadBooks() {
-        File file = new File(FILE_NAME);
-        
-        System.out.println("aa");
-        // Create file if it does not exist
-        if (!file.exists()) {
-            try {
-                if (file.createNewFile()) {
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                        writer.write("Harry Potter 10.99\n");
-                    }
-                    System.out.println("books.txt created with default book.");
-                }
-            } catch (IOException e) {
-                System.out.println("Failed to create books.txt: " + e.getMessage());
-                return;
-            }
-        }
-
-        books.clear();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                int lastSpace = line.lastIndexOf(" ");
-                if (lastSpace == -1) continue;
-
-                String name = line.substring(0, lastSpace);
-                double price = Double.parseDouble(line.substring(lastSpace + 1));
-
-                books.add(new Book(name, price));
-            }
-        } catch (IOException | NumberFormatException e) {
-            System.out.println("Error loading books: " + e.getMessage());
-        }
+         try( BufferedReader reader = new BufferedReader(new FileReader("books.txt"))){
+         String line;
+         while((line = reader.readLine()) != null){
+             String[] parameters = line.split(",");
+             this.books.add(new Book(parameters[0],Double.parseDouble(parameters[1])));
+         }
+             
+        }catch(IOException e){System.out.println("Error Loading Books");}
     }
 
 }

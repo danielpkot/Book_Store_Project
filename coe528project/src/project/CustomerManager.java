@@ -1,10 +1,12 @@
 package project;
 
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 
 
 public class CustomerManager {
@@ -100,9 +102,16 @@ public class CustomerManager {
     
     // Saving this for later gonna need to figure out how to parse
     public void loadCustomers(){
-        
+        try( BufferedReader reader = new BufferedReader(new FileReader("customers.txt"))){
+         String line;
+         while((line = reader.readLine()) != null){
+             String[] parameters = line.split(",");
+             this.addCustomer(new Customer(parameters[0],parameters[1],Integer.parseInt(parameters[2])));
+         }
+             
+        }catch(IOException e){System.out.println("Do smtng");}
     }
-    
+  
     /**
      * Saves current customer list to file.
      *
@@ -113,7 +122,7 @@ public class CustomerManager {
     public void saveCustomers(){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Customer customer : customers) {
-                writer.write(customer.toString() + "," + (customer.getPoints() >= 1000 ? "Gold" : "Silver"));
+                writer.write(customer.toString());
                 writer.newLine();
             }
         } catch (IOException e) {

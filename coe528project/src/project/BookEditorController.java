@@ -66,21 +66,19 @@ public class BookEditorController implements Initializable {
        String price =  priceInput.getText();
        
        try{
-           bm.addBook(new Book(name,(double) Double.parseDouble(price)));
-           ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
-            bookEditTable.setItems(bookList);
-            nameInput.clear();
-            priceInput.clear();
+           if ((double) Double.parseDouble(price) > 0){
+            bm.addBook(new Book(name,(double) Double.parseDouble(price)));
+            ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
+             bookEditTable.setItems(bookList);
+             nameInput.clear();
+             priceInput.clear();
+           }else{
+               System.out.println("Price must be positive");
+           }
            
        }catch(NumberFormatException e){
            System.out.println("Price not a double");
-       }
-       
-       
-       for(Book b:bm.getBooks()){
-           System.out.println(b.toString());
-       }
-       
+       }     
     }
    
     public void removeBook(ActionEvent event) throws IOException{

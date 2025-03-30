@@ -1,8 +1,8 @@
-
 package project;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,7 +36,7 @@ public class CustomerStartScreenController implements Initializable {
     private Text topText;
     
     @FXML
-    private TableView<Book> bookEditTable;
+    private TableView<Book> bookTable;
 
     @FXML
     private TableColumn<Book, String> bookName;
@@ -43,7 +44,8 @@ public class CustomerStartScreenController implements Initializable {
     @FXML
     private TableColumn<Book, Double> bookPrice;
     
- 
+    @FXML
+    private TableColumn<Book, CheckBox> select;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,9 +59,10 @@ public class CustomerStartScreenController implements Initializable {
                 " points. Your status is " + ((c.getPoints() >= 1000) ? "Gold" : "Silver") );
         bookName.setCellValueFactory(new PropertyValueFactory<Book, String>("name"));
         bookPrice.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
+        select.setCellValueFactory(new PropertyValueFactory<Book, CheckBox>("select"));
         ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
-        bookEditTable.setItems(bookList);
-        bookEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        bookTable.setItems(bookList);
+        bookTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void switchToLoginPage(ActionEvent event) throws IOException{
@@ -70,6 +73,80 @@ public class CustomerStartScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-   
     
+    public void buy(ActionEvent event) throws IOException{
+        
+     
+        boolean  flag = false;
+        
+        double totalCost=0;
+        ArrayList<Book> removed = new ArrayList<Book>();
+        for(Book b: bm.getBooks()){
+            if(b.getSelect().isSelected()){
+                flag = true;
+                totalCost += b.getPrice();
+                c.purchase(b.getPrice());
+                removed.add(b);
+            }
+        }
+        
+        bm.getBooks().removeAll(removed);
+        
+        if (flag){
+            FXMLLoader loader =  new FXMLLoader((getClass().getResource("customerCostScreen.fxml")));
+            Parent root = loader.load();
+            
+            CustomerCostScreenController cc = loader.getController();
+            cc.setText(totalCost,c);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+            
+    }
+    
+    
+     public void buyWithPoints(ActionEvent event) throws IOException{
+        
+     
+        boolean  flag = false;
+        
+        double totalCost = 0;
+                
+        ArrayList<Book> removed = new ArrayList<Book>();
+        for(Book b: bm.getBooks()){
+            if(b.getSelect().isSelected()){
+                flag = true;
+                totalCost += b.getPrice();
+                removed.add(b);
+            }
+        }
+        
+     
+        bm.getBooks().removeAll(removed);
+        if ( (totalCost - c.getPoints()/100) <= 0){
+            totalCost = 0;
+        }
+        else{
+            totalCost = totalCost - c.getPoints()/100;
+        }
+        for (Book b: removed){
+            c.purchaseWithPoints(b.getPrice());
+        }
+        if (flag){
+            FXMLLoader loader =  new FXMLLoader((getClass().getResource("customerCostScreen.fxml")));
+            Parent root = loader.load();
+            
+            CustomerCostScreenController cc = loader.getController();
+            cc.setText(totalCost,c);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+            
+    }
 }
+
+  

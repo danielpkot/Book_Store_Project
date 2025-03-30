@@ -55,6 +55,9 @@ public class Customer extends User {
      */
     public void purchase(double amount) { state.purchase(this, amount); }
     
+    public void purchaseWithPoints(double amount) { state.purchaseWithPoints(this, amount); }
+    
+    
     /**
      * Converts the customer data to a string for file storage.
      * 

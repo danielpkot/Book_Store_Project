@@ -79,8 +79,7 @@ public class LoginScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bm.loadBooks();
-        cm.loadCustomers();
+      
     }
    
 }
