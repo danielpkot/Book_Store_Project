@@ -81,6 +81,9 @@ public class CustomerManager {
                 return;
             }
         }
+        if(c.getUsername().isEmpty() || c.getPassword().isEmpty()){
+            return;
+        }
         customers.add(c);
     }
     
@@ -90,7 +93,7 @@ public class CustomerManager {
      * Modifies: this.customers
      * Effects: Deletes the specified customer from the list
      */
-    public void Remove(Customer c){
+    public void remove(Customer c){
         if (c == null){
             return;
         }

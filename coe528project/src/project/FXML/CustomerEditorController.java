@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import project.Customer;
 import project.CustomerManager;
+import project.Owner;
 
 /**
  * FXML Controller class
@@ -37,7 +38,7 @@ public class CustomerEditorController implements Initializable {
     private Scene scene;
     private Parent root;
     
-    CustomerManager cm = CustomerManager.getInstance();
+    private Owner owner = Owner.getInstance();
     
    
     
@@ -66,8 +67,8 @@ public class CustomerEditorController implements Initializable {
        String name = nameInput.getText();
        String password =  passwordInput.getText();
        
-        cm.addCustomer(new Customer(name,password, 0));
-        ObservableList<Customer> customerList = FXCollections.observableList(cm.getCustomers());
+        owner.addCustomer(new Customer(name,password, 0));
+        ObservableList<Customer> customerList = FXCollections.observableList(owner.getCustomerManager().getCustomers());
         customerEditTable.setItems(customerList);
         nameInput.clear();
         passwordInput.clear();
@@ -98,7 +99,7 @@ public class CustomerEditorController implements Initializable {
         customerName.setCellValueFactory(new PropertyValueFactory<Customer, String>("Username"));
         customerPassword.setCellValueFactory(new PropertyValueFactory<Customer, String>("password"));
         customerPoints.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("points"));
-        ObservableList<Customer> customerList = FXCollections.observableList(cm.getCustomers());
+        ObservableList<Customer> customerList = FXCollections.observableList(owner.getCustomerManager().getCustomers());
         customerEditTable.setItems(customerList);
         customerEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }    

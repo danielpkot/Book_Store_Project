@@ -15,9 +15,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import project.Customer;
 import project.CustomerManager;
+import project.Owner;
 
 
-public class FXMLController implements Initializable {
+public class LoginPageController implements Initializable {
     
    
    @FXML
@@ -36,14 +37,14 @@ public class FXMLController implements Initializable {
    @FXML
    private void handleLogin(ActionEvent event) throws IOException{
        
-       CustomerManager cm = CustomerManager.getInstance();
+       Owner owner = Owner.getInstance();
        
        String input1 = usernameField.getText();
        String input2 = passwordField.getText();
        
        boolean loggedin = false;
        
-       if(input1.equals(input2) && input1.equals("admin")){
+       if(input1.equals(owner.getUsername()) && input2.equals(owner.getPassword())){
            System.out.println("Logged in: Owner");
            loggedin = true;
            FXMLLoader loader = 
@@ -55,7 +56,7 @@ public class FXMLController implements Initializable {
             stage.show();
        }
        else{
-           for(Customer c: cm.getCustomers()){
+           for(Customer c: owner.getCustomerManager().getCustomers()){
                if (c.getUsername().equals(input1) 
                        && c.getPassword().equals(input2)){
                    System.out.println("Sucess");

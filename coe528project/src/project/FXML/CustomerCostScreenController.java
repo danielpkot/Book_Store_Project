@@ -14,7 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import project.BookManager;
 import project.Customer;
+import project.CustomerManager;
 
 
 public class CustomerCostScreenController implements Initializable {
@@ -22,6 +24,9 @@ public class CustomerCostScreenController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+    private BookManager bm = BookManager.getInstance();
+    private CustomerManager cm = CustomerManager.getInstance();
     
     
     @FXML
@@ -43,10 +48,16 @@ public class CustomerCostScreenController implements Initializable {
      public void switchToLoginPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        for(Customer c: cm.getCustomers()){
+            if (c.getLogin() == true){
+                c.setLogin(false);
+            }
+        }
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
+        
+    }   
     
     /**
      * Initializes the controller class.

@@ -74,6 +74,7 @@ public class CustomerStartScreenController implements Initializable {
         
         Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        c.setLogin(false);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

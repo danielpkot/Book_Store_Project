@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import project.Book;
 import project.BookManager;
+import project.Owner;
 
 
 public class BookEditorController implements Initializable {
@@ -31,7 +32,7 @@ public class BookEditorController implements Initializable {
     private Scene scene;
     private Parent root;
     
-    BookManager bm = BookManager.getInstance();
+    private Owner owner = Owner.getInstance();
     
     @FXML
     private Button BackButton;
@@ -68,8 +69,8 @@ public class BookEditorController implements Initializable {
        
        try{
            if ((double) Double.parseDouble(price) > 0){
-            bm.addBook(new Book(name,(double) Double.parseDouble(price)));
-            ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
+            owner.addBook(new Book(name,(double) Double.parseDouble(price)));
+            ObservableList<Book> bookList = FXCollections.observableList(owner.getBookManager().getBooks());
              bookEditTable.setItems(bookList);
              nameInput.clear();
              priceInput.clear();
@@ -98,7 +99,7 @@ public class BookEditorController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         bookName.setCellValueFactory(new PropertyValueFactory<Book, String>("name"));
         bookPrice.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
-        ObservableList<Book> bookList = FXCollections.observableList(bm.getBooks());
+        ObservableList<Book> bookList = FXCollections.observableList(owner.getBookManager().getBooks());
         bookEditTable.setItems(bookList);
         bookEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }    

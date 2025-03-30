@@ -53,17 +53,22 @@ public class BookManager {
      /**
      * Adds a book to the manager if it does not already exist.
      * 
-     * Requires: b is not null
+     * Requires: 
      * Modifies: this.books
      * Effects: Adds the book to the list if not already present
      */
 
     public void addBook(Book b){
+        if(b == null){ return;}
         for (Book b1 : books) {
             if (b.getName().equals(b1.getName())) {
                 System.out.println("Book already exists!");
                 return;
             }
+        }
+        if(b.getName().isEmpty() || b.getPrice() <= 0){
+            System.out.println("Name can't be empty/Price can't be 0");
+            return;
         }
         books.add(b);
     }
@@ -71,12 +76,13 @@ public class BookManager {
     /**
      * Removes a book from the manager.
      * 
-     * Requires: b is not null and exists in the list
+     * Requires: 
      * Modifies: this.books
      * Effects: Removes the specified book from the list
      */
 
     public void remove(Book b){
+        if(b== null){ return;}
         books.remove(b);
     }
     
