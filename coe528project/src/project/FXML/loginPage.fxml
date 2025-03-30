@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.LoginScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.FXML.LoginScreenController">
    <children>
       <Button fx:id="loginButton" layoutX="244.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="48.0" prefWidth="112.0" text="Let's Go!" />
       <TextField fx:id="usernameField" layoutX="226.0" layoutY="188.0" promptText="Username" />

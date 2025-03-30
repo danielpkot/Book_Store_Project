@@ -1,5 +1,4 @@
-
-package project;
+package project.FXML;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +19,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import project.Book;
+import project.BookManager;
 
 
 public class BookEditorController implements Initializable {

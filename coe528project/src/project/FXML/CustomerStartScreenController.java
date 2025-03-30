@@ -1,5 +1,6 @@
-package project;
+package project.FXML;
 
+import project.FXML.CustomerCostScreenController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import project.Book;
+import project.BookManager;
+import project.Customer;
+import project.CustomerManager;
 
 
 public class CustomerStartScreenController implements Initializable {
@@ -85,11 +90,11 @@ public class CustomerStartScreenController implements Initializable {
             if(b.getSelect().isSelected()){
                 flag = true;
                 totalCost += b.getPrice();
-                c.purchase(b.getPrice());
+                
                 removed.add(b);
             }
         }
-        
+        c.purchase(totalCost);
         bm.getBooks().removeAll(removed);
         
         if (flag){
@@ -123,21 +128,22 @@ public class CustomerStartScreenController implements Initializable {
             }
         }
         
-     
+       
         bm.getBooks().removeAll(removed);
-        if ( (totalCost - c.getPoints()/100) <= 0){
-            totalCost = 0;
-        }
-        else{
-            totalCost = totalCost - c.getPoints()/100;
-        }
-        for (Book b: removed){
-            c.purchaseWithPoints(b.getPrice());
-        }
+        
+      
+       
+       
         if (flag){
             FXMLLoader loader =  new FXMLLoader((getClass().getResource("customerCostScreen.fxml")));
             Parent root = loader.load();
-            
+            if ( (totalCost - c.getPoints()/100) <= 0){
+            totalCost = 0;
+            }
+            else{
+                totalCost = totalCost - c.getPoints()/100;
+            }
+            c.purchaseWithPoints(totalCost);
             CustomerCostScreenController cc = loader.getController();
             cc.setText(totalCost,c);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

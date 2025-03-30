@@ -1,4 +1,4 @@
-package project;
+package project.FXML;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import project.Customer;
+import project.CustomerManager;
 
 
 public class FXMLController implements Initializable {
