@@ -4,26 +4,26 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/customerCostScreen.fxml</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/CustomerEditor.fxml</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/adminPage.fxml</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/customerEditor.fxml</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/ownerPage.fxml</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/BookEditorController.java</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/CustomerCostScreenController.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/bookEditor.fxml</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/customerStartScreen.fxml</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/Book.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/Main.java</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/sceneController.java</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/OwnerPageController.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/CustomerStartScreenController.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/Owner.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/BookManager.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/CustomerManager.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/LoginPageController.java</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/CustomerEditorController.java</file>
-            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/LoginScreenController.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/Customer.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/SilverState.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/GoldState.java</file>
             <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/loginPage.fxml</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/User.java</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/CustomerState.java</file>
+            <file>file:/C:/Users/danie/Desktop/528%20NOW/COE528-Project/coe528project/src/project/FXML/CustomerCostScreenController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -71,7 +71,7 @@ public class BookManager {
     public void addBook(Book b){
         if(b == null){ return;}
         for (Book b1 : books) {
-            if (b.getName().trim().equals(b1.getName().trim())) {
+            if (b.getName().trim().equals(b1.getName().trim())&& b.getPrice()==b1.getPrice()) {
                 System.out.println("Book already exists!");
                 return;
             }
