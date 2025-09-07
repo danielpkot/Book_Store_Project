@@ -10,7 +10,7 @@ Admin
 - Can add/delete users.
 - Manages account and control account information such as usernames,passwords and account points.
 
-The admin password/username is admin.
+The admin password/username is: admin
 
 User
 - Purchase books.
