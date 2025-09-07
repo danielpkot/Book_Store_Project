@@ -20,6 +20,6 @@ User
 - Every 1 CAD spent by the user earns 10 points.
 - Points can be used towards purchases, every 100 points deducts 1 CAD from the total cost.
 
-![Use Case Diagram](Images/UC_D)
+![Use Case Diagram](Images/UC_D.png)
 
-![UML Class Diagram](Images/UML_CD)
+![UML Class Diagram](Images/UML_CD.png)
