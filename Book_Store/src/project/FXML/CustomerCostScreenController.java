@@ -18,7 +18,19 @@ import project.BookManager;
 import project.Customer;
 import project.CustomerManager;
 import project.Owner;
-
+/*
+ * Abstraction Function:
+ * AF(ccs) = A CustomerCostScreenController object where:
+ *         - ccs.stage is the customerCostScreen gui
+ *         - ccs.owner represents the admin
+ *         - ccs.pointsText represents the points
+ *         - ccs.totalCostText represents the total cost
+ *
+ * Representation Invariant:
+ * RI(ccs) = true if:
+ *         - ccs.owner != null
+ *         - ccs.stage,ccs.scene,ccs.root are valid javaFX objects
+ */
 
 public class CustomerCostScreenController  {
 
@@ -36,7 +48,12 @@ public class CustomerCostScreenController  {
     @FXML
     private Text totalCostText;
     
-    //sets the text using the totalCost of the books selected
+   /*
+   *Requires: c and totalCost not null
+   *Modifies: totalCostText, pointsText
+   *Effects: Sets text at top of screen to display cost of books
+   *         in cart and customers membership status
+   */
     public void setText(double totalCost,Customer c){
         totalCostText.setText("Total Cost: " + totalCost );
         pointsText.setText("Points: "+c.getPoints() + ", " + 
@@ -44,7 +61,11 @@ public class CustomerCostScreenController  {
  
     }
     
-    //method for going back to login page
+    /*
+   *Requires: loginPage.fxml is in the directory 
+   *Modifies: this.stage & this.scene
+   *Effects: Sets the stage to the login screen
+   */
     public void switchToLoginPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

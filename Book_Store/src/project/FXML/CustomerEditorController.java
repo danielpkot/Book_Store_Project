@@ -27,10 +27,22 @@ import project.Customer;
 import project.CustomerManager;
 import project.Owner;
 
-/**
- * FXML Controller class
+/*
+ * Abstraction Function:
+ * AF(cec) = A CustomerEditorController object where:
+ *         - cec.stage is the customer Editor gui
+ *         - cec.owner represents the admin
+ *         - cec.customerEditorTable is the table containing all customers
+ *         - cec.customerName is the column with customer names
+ *         - cec.customerPassword is the column with customer passwords
+ *         - cec.customerPoints is the column with customer points
+ *         - cec.nameInput represents admins input into name textbox
+ *         - cec.passwordInput represents admins input into password textbox
  *
- * @author danie
+ * Representation Invariant:
+ * RI(cec) = true if:
+ *         - cec.owner != null
+ *         - cec.stage,cec.scene,cec.root are valid javaFX objects
  */
 public class CustomerEditorController implements Initializable {
     //Stage, Scene and Parent used for switching to a different GUI window
@@ -61,7 +73,12 @@ public class CustomerEditorController implements Initializable {
     @FXML
     private TextField passwordInput;
     
-    //Method for adding Customers
+   /*
+   *Modifies: Owner.CustomerManager.customers, customerEditTable,
+   *           nameInput, passwordInput
+   *Effects: creates new customer object with given name and password,
+   *          updates the customer table and clears text fields
+   */
     public void addCustomer(ActionEvent event) throws IOException{
        //Gathers info from the textfields and stores them
        String name = nameInput.getText();
@@ -76,7 +93,10 @@ public class CustomerEditorController implements Initializable {
         passwordInput.clear();
     }
     
-    //Method for removing customers
+    /*
+   *Modifies: customerEditTable
+   *Effects: Removes Selected Customer from the customer table
+   */
     public void removeCustomer(ActionEvent event) throws IOException{
         ObservableList<Customer> selectedCustomers , customerList;
         //gets items from table
@@ -88,7 +108,11 @@ public class CustomerEditorController implements Initializable {
         customerList.removeAll(selectedCustomers);
     }
    
-   //Switches to main owner page
+   /*
+   *Requires: ownerPage.fxml is in the directory 
+   *Modifies: this.stage & this.scene
+   *Effects: Sets the stage to the admin page
+   */
    public void switchToAdminPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("ownerPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -98,7 +122,13 @@ public class CustomerEditorController implements Initializable {
     }
    
    
-    @Override
+    /*
+   *Requires: ownerPage.fxml is in the directory 
+   *Modifies: customerName,customerPassword,customerPoints
+   *          columns, and customerEditTable
+   *Effects:  Initializes customerEditTable with customers in 
+   *          owner.customerManager.customers
+   */
     public void initialize(URL url, ResourceBundle rb) {
         //primes the columns with the specified getters, ex. Customer Class getUsername()
         customerName.setCellValueFactory(new PropertyValueFactory<Customer, String>("Username"));

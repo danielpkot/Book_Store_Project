@@ -22,7 +22,22 @@ import javafx.stage.Stage;
 import project.Book;
 import project.BookManager;
 import project.Owner;
-
+/*
+ * Abstraction Function:
+ * AF(bec) = A BookEditorController object where:
+ *         - bec.owner represents the admin
+ *         - bec.stage is the bookEditor gui
+ *         - bec.bookEditorTable is the table containing all books
+ *         - bec.bookName is the column with book names
+ *         - bec.bookPrice is the column with book prices
+ *         - bec.nameInput represents admins input into name textbox
+ *         - bec.priceInput represents admins input into price textbox
+ *
+ * Representation Invariant:
+ * RI(bec) = true if:
+ *         - bec.owner != null
+ *         - bec.stage,bec.scene,bec.root are valid javaFX objects
+ */
 
 public class BookEditorController implements Initializable {
 
@@ -51,7 +66,11 @@ public class BookEditorController implements Initializable {
     private TextField priceInput;
     
     
-  //Switches to owner main menu
+  /*
+   *Requires: ownerpage.fxml is in the directory 
+   *Modifies: this.stage & this.scene
+   *Effects: Sets the stage to the admin stage
+   */
    public void switchToAdminPage(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("ownerPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -60,7 +79,13 @@ public class BookEditorController implements Initializable {
         stage.show();
     }
    
-   //Method for adding books
+   /*
+   *Requires: nameInput and priceInput are not null
+   *Modifies:owner.bookManager.books,bookEditTable, NameInput, PriceInput 
+   *Effects: if price is positive & a double, adds the specified book and update the 
+   *         bookEditTable to display, else return string specifying either the price is
+   *         not a double or not positive.
+   */
    public void addBook(ActionEvent event) throws IOException{
        
        //Gathers info from the textfields and stores them
@@ -88,7 +113,11 @@ public class BookEditorController implements Initializable {
        }     
     }
    
-   //Method for removing books
+   /*
+   *Requires: bookEditTable != null
+   *Modifies: bookEditTable, owner.bookManager.books
+   *Effects: Removes the selected book from the table & booklist
+   */
     public void removeBook(ActionEvent event) throws IOException{
         ObservableList<Book> selectedBooks , bookList;
         //gets items from table
@@ -101,7 +130,11 @@ public class BookEditorController implements Initializable {
         bookList.removeAll(selectedBooks);
     }
     
-    
+    /*
+   *Requires: bookEditTable,bookName, bookPrice, owner.bookManger are not null
+   *Modifies: bookName & bookPrice table Columns and bookEditTable
+   *Effects: Initializes the table to display books
+   */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //primes the columns with the specified getters, ex. Book Class getName()

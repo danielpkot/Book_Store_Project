@@ -24,7 +24,24 @@ import javafx.stage.Stage;
 import project.Book;
 import project.Customer;
 import project.Owner;
-
+/*
+ * Abstraction Function:
+ * AF(css) = A CustomerStarScreenController object where:
+ *         - ccs.stage is the customer start screen gui
+ *         - ccs.owner represents the admin
+ *         - ccs.c represents the customer
+ *         - ccs.bookTable is the table containing all books
+ *         - ccs.bookName is the column with book names
+ *         - ccs.bookPrice is the column with book pricesput into password textbox
+ *         - ccs.select is marker for selected books
+ *         - ccs.topText represents the welcome text at the top of the screen
+ *
+ * Representation Invariant:
+ * RI(css) = true if:
+ *         - css.owner != null
+ *         - css.c != null after initializing
+ *         - css.stage,css.scene,css.root are valid javaFX objects
+ */  
 
 public class CustomerStartScreenController implements Initializable {
     
@@ -54,6 +71,10 @@ public class CustomerStartScreenController implements Initializable {
     @FXML
     private TableColumn<Book, CheckBox> select;
     
+   /* 
+   *Modifies: c, topText, bookName, bookPrice, select, bookTable
+   *Effects: Sets the stage to the admin page
+   */ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Go through the customer and find the correct Customer
@@ -76,7 +97,11 @@ public class CustomerStartScreenController implements Initializable {
         bookTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
     
-      //Switches to Customer page
+   /*
+   *Requires: loginPage.fxml is in the directory 
+   *Modifies: this.stage & this.scene
+   *Effects: Sets the stage to the admin stage
+   */
     public void switchToLoginPage(ActionEvent event) throws IOException{
         
         Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
@@ -87,6 +112,13 @@ public class CustomerStartScreenController implements Initializable {
         stage.show();
     }
     
+   /*
+   *Requires: customerCostScreen.fxml is in the directory 
+   *Modifies: c.points, owner.bookManager.books,stage, scene
+   *Effects: calculates cost of selected books, removes purchased
+   *         books from store and if atleast one book was selected
+   *         switch page to the cost screen
+   */
     public void buy(ActionEvent event) throws IOException{
         
         //flag for making sure books are selected, before attempting any logic
@@ -128,7 +160,13 @@ public class CustomerStartScreenController implements Initializable {
             
     }
     
-    
+    /*
+   *Requires: customerCostScreen.fxml is in the directory 
+   *Modifies: c.points, owner.bookManager.books,stage, scene
+   *Effects: calculates cost of selected books & deduct discount 
+   *         using points, removes purchased  books from table and if atleast
+   *          one book was selected switch page to the cost screen
+   */
      public void buyWithPoints(ActionEvent event) throws IOException{
         
         //flag for making sure books are selected, before attempting any logic
